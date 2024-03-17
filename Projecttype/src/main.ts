@@ -1,8 +1,9 @@
 // main.ts
-
 import './style.css';
 import { ProjectService } from './projectservice.ts';
-import { Project } from './project.ts'; 
+//import { StoryService } from './storyservice.ts';
+//import { UserManager } from './user.ts'; // Usuwamy import, ponieważ UserManager nie jest używany w tej chwili
+import { Project } from './project.ts';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -34,14 +35,15 @@ addProjectButton.addEventListener('click', () => {
   const newProject: Project = {
     id: Math.floor(Math.random() * 1000), // generate random id for simplicity
     name: 'New Project',
-    description: 'Description for New Project'
+    description: 'Description for New Project',
+    ownerId: 1
   };
   ProjectService.addProject(newProject);
   renderProjects();
 });
 
 projectList.addEventListener('click', event => {
-  const target = event.target as HTMLElement;
+  const target = event.target as HTMLElement; // Rzutujemy event.target na HTMLElement
   if (target.classList.contains('delete-project')) {
     const projectId = parseInt(target.dataset.id!);
     ProjectService.deleteProject(projectId);
@@ -54,7 +56,8 @@ projectList.addEventListener('click', event => {
       const updatedProject: Project = {
         id: projectId,
         name: newName,
-        description: newDescription
+        description: newDescription,
+        ownerId: 1
       };
       ProjectService.updateProject(updatedProject);
       renderProjects();
