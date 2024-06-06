@@ -169,7 +169,7 @@ export function renderProjects(
 
   return `${
     userManager.currentStoryId == null
-      ? `<div class="projectDetails p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md">
+      ? `<div class="projectDetails p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md text-center">
   <div class="projectInfo" data-id="${project.id}">   
     <button class="exitProject px-10 text-lg font-bold mb-2">←</button>    
     <h2 class="text-2xl font-bold mb-4">Name: ${project.name}</h2>
