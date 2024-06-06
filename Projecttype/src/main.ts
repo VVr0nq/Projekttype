@@ -20,30 +20,18 @@ export async function refreshProjects() {
   const appDiv = document.querySelector<HTMLDivElement>("#app");
   if (appDiv) {
     appDiv.innerHTML = `
-        <div class="header-container text-center mb-4">
-          <h1 class="text-2xl font-bold">MenageAPP</h1>
+          <h1 class="text-2xl font-bold mb-4 text-center">Project Manager App</h1>
         </div>
         ${loginView(userManager)}
         <div>
-          ${
-            userManager.currentProjectId != null
-              ? '<a class="navBar navHome hover:text-cyan-500 hover:cursor-pointer ml-4">&larr; </a>'
-              : ""
-          }
         </div>
-        <div class="absolute right-10 lg:right-[17%] top-5">
+        <div class="absolute right-11 lg:right-[19%] top-6">
           <label class="inline-flex items-center cursor-pointer">
           <input type="checkbox" value="" id="themeToggle" class="sr-only peer" checked>
-  
         <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
           <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Dark mode</span>
         </label>
         </div>
-        ${
-          userManager.currentProjectId == null &&
-          ` <div class="text-center text-3xl my-4"><button class="addBtn bg-blue-500 text-white py-2 px-4 rounded">+</Button></div>`
-        }
-       
         <div class="projectContainer flex-col flex ">
       ${
         userManager.currentProjectId == null
@@ -66,9 +54,7 @@ export async function refreshProjects() {
     </div>
     `;
   }
-  const themeToggle = document.getElementById(
-    "themeToggle"
-  ) as HTMLInputElement;
+  const themeToggle = document.getElementById("themeToggle") as HTMLInputElement;
   const isDarkMode = localStorage.getItem("theme") === "dark";
   if (isDarkMode) {
     document.documentElement.classList.add("dark");
@@ -104,7 +90,7 @@ async function handleClick(event: MouseEvent) {
     }
 
     await createProject({ id: "", name: newName, desc: newDesc });
-    userManager.setCurrentProject(null); // Ensure the project view goes back to home
+    userManager.setCurrentProject(null); // going back?
     await refreshProjects();
   }
 
